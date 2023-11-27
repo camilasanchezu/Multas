@@ -7,14 +7,14 @@
 
         <HorizontalStackLayout
             HorizontalOptions="FillAndExpand"
-            BackgroundColor="DarkBlue">
-            <Image Source="dotnet_bot.png"
+            BackgroundColor="BlueViolet">
+            <Image Source="sunshine.png"
                    HeightRequest="50"
                    WidthRequest="50"
                    />
             <Label Text="ProductoApp"
                    FontSize="30"
-                   TextColor="White"/>
+                   TextColor="FloralWhite"/>
         </HorizontalStackLayout>
         <Button Text="Nuevo Producto"
                 FontSize="15"
