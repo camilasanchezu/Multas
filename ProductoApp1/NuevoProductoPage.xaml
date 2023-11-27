@@ -10,7 +10,8 @@
                     <EntryCell x:Name="Nombre"
                                Placeholder="Nombre"/>
                     <EntryCell x:Name="cantidad"
-                               Placeholder="Cantidad"/>
+                               Placeholder="Cantidad"
+                               Keyboard="Numeric"/>
                     <EntryCell x:Name="Descripcion"
                                Placeholder="Descripción"/>
                 </TableSection>
