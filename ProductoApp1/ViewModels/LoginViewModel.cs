@@ -14,8 +14,8 @@ namespace ProductoApp1.ViewModels
     {
         private APIService _APIService;
         [ObservableProperty]
-        public string usuario;
-        
+       
+        public int IdProducto;
 
         public LoginViewModel()
         {
@@ -31,8 +31,6 @@ namespace ProductoApp1.ViewModels
             Producto producto = await _APIService.GetProducto(IdProducto);
             if (producto != null)
             {
-
-                usuario = "";
                 return 1;
             }
             else
