@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductoApp1.ViewModels
 {
-    internal class ProductoViewModel
+    internal class DetalleModelView
     {
     }
 }
