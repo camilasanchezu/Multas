@@ -7,26 +7,31 @@ using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
 using ProductoApp1.Models;
 using ProductoApp1.Services;
+using ProductoApp1.ViewModels;
 
 namespace ProductoApp1;
 
 public partial class ProductoPage : ContentPage
 {
     private readonly APIService _APIService;
+    private ProductoViewModel _viewModel;
 	public ProductoPage(APIService apiservice)
     {
         InitializeComponent();
         _APIService = apiservice;
+        _viewModel = new ProductoViewModel(_APIService);
+        BindingContext = _viewModel;
+        _viewModel.ActualizarListaCommand.Execute(null);
        
     }
 
-    protected override async void OnAppearing()
+    /*protected override async void OnAppearing()
     {
         base.OnAppearing();
         List<Producto> ListaProducto = await _APIService.GetProductos();
         var productos = new ObservableCollection<Producto>(ListaProducto);
         listaProductos.ItemsSource = productos;
-    }
+    }*/
 
     private async void OnClickNuevoProducto(object sender, EventArgs e)
     {
@@ -37,15 +42,14 @@ public partial class ProductoPage : ContentPage
        await Navigation.PushAsync(new NuevoProductoPage(_APIService));
     }
 
-    private async void OnClickShowDetails(object sender, SelectedItemChangedEventArgs e)
+    private  void OnClickShowDetails(object sender, SelectedItemChangedEventArgs e)
     {
-        var toast = CommunityToolkit.Maui.Alerts.Toast.Make("Click en ver producto", ToastDuration.Short, 14);
+        Producto producto= e.SelectedItem as Producto;
+        ((ProductoViewModel)BindingContext).OpenDetailsCommand.Execute(producto);
 
-        await toast.Show();
-        Producto producto = e.SelectedItem as Producto;
-        await Navigation.PushAsync(new DetalleProductoPage(_APIService)
+        /*if(e.SelectedItem is Producto producto)
         {
-            BindingContext = producto,
-        });
+            (BindingContext as ProductoViewModel)?.OnClickShowDetails.Execute(producto);
+        }*/
     }
 }

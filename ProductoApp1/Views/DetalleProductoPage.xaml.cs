@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Core;
 using ProductoApp1.Models;
 using ProductoApp1.Services;
+using ProductoApp1.ViewModels;
 
 namespace ProductoApp1;
 
@@ -8,22 +9,19 @@ public partial class DetalleProductoPage : ContentPage
 {
     private Producto _producto;
     private readonly APIService _APIService;
+    private DetalleViewModel _viewModel;
 
-    public DetalleProductoPage(APIService apiservice)
+    public DetalleProductoPage(APIService apiservice,Producto producto)
 	{
 		InitializeComponent();
         _APIService = apiservice;
+        _viewModel = new DetalleViewModel(_APIService);
+        BindingContext= _viewModel;
+        _viewModel.Initialize(producto);
 
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        _producto = BindingContext as Producto;
-        Nombre.Text = _producto.Nombre;
-        Cantidad.Text = _producto.cantidad.ToString();
-        Descripcion.Text = _producto.Descripcion;
-    }
+   
 
 
     private async void OnClickBorrar(object sender, EventArgs e)
