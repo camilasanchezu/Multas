@@ -1,38 +1,55 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:ProductoApp1.ViewModels"
              x:Class="ProductoApp1.ProductoPage"
-             Title="ProductoPage">
+             Title="Universidad de las Americas">
+    
+    <ContentPage.BindingContext>
+        <viewmodel:ProductoViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Recargar Productos" Command="{Binding ActualizarListaCommand}" />
+    </ContentPage.ToolbarItems>
+
     <VerticalStackLayout>
 
         <HorizontalStackLayout
             HorizontalOptions="FillAndExpand"
-            BackgroundColor="BlueViolet">
-            <Image Source="sunshine.png"
-                   HeightRequest="50"
-                   WidthRequest="50"
+            BackgroundColor="DarkRed">
+            <Image Source="udla.png"
+                   HeightRequest="100"
+                   WidthRequest="100"
                    />
-            <Label Text="ProductoApp"
-                   FontSize="30"
+            <Label Text="Multas"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontSize="50"
+                   FontAttributes="Bold"
                    TextColor="FloralWhite"/>
         </HorizontalStackLayout>
-        <Button Text="Nuevo Producto"
+        <Button Text="Nueva Multa"
                 FontSize="15"
+                FontAttributes="Bold"
+                TextColor="Black"
                 Clicked="OnClickNuevoProducto"
                 Margin="5"/>
-        <ListView x:Name="listaProductos"
+        <ListView x:Name="ListaProductos"
+                  ItemsSource="{Binding Productos}"
                   RowHeight="80"
                   ItemSelected="OnClickShowDetails">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="vinilologo.jpg"
+                            <Image Source="usericon.png"
                                    HeightRequest="70"
                                    WidthRequest="70"/>
                             <StackLayout Orientation="Vertical">
                                 <Label Text="{Binding Nombre}"
                                    FontSize="25"
+                                 
                                    WidthRequest="300"/>
                                 <Label Text="{Binding cantidad}"
                                    FontSize="20"/>
